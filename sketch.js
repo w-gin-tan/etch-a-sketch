@@ -4,15 +4,32 @@ const setMultipleAttributes = (elem, attributes) => {
     });
 }
 
-const setup = () => {
-    // User prompt for grid size
-    const userSize = prompt('How large would you like your grid?') || 1;
-
+const sketchpadSetup = (inputSize) => {
     // Grid and square variables
     const gridSize = 256;
-    const squareSize = gridSize / userSize;
-    const squareNo = userSize**2;
+    const squareSize = gridSize / inputSize;
+    const squareNo = inputSize**2;
 
+    let sketchpad = document.querySelector('.sketchpad');
+    console.log(sketchpad);
+    if (sketchpad) {
+        sketchpad.remove();
+    }
+    sketchpad = document.createElement('div');
+    sketchpad.classList.add('sketchpad');
+    sketchpad.setAttribute('style', `width: ${gridSize}px; height: ${gridSize}px; border: 5px solid black; display: flex; flex-wrap: wrap; flex-direction: column;`);
+
+    for (let squares = 0; squares < squareNo; squares++) {
+        let square = document.createElement('div');
+        square.classList.add('square');
+        square.setAttribute('style', `width: ${squareSize}px; height: ${squareSize}px; border: 0.05px dotted black; box-sizing: border-box;`);
+        sketchpad.appendChild(square);
+    }
+
+    document.body.appendChild(sketchpad);
+}
+
+const setup = () => {
     // Multi attribute variable for elements
     let multiAttributes = {}; 
 
@@ -33,26 +50,28 @@ const setup = () => {
         type: 'range',
         min: '1',
         max: '100',
-        value: '8',
-        oninput: 'sliderText.innerText = this.value'
+        value: '8', // default value for this and sliderText innerText
+        oninput: 'document.querySelector(\'.sliderValue\').innerText = this.value'
     };
+    setMultipleAttributes(sliderInput, multiAttributes);
+    sliderInput.addEventListener('input', (event) => {
+        // change the size of the grid
+        sketchpadSetup(event.target.value);
+        toSketch();
+    });
 
     const sliderText = document.createElement('p');
     sliderText.classList.add('sliderValue');
-    
+    sliderText.innerText = sliderInput.value;
+    multiAttributes = {
+        style: 'font-size: 26px; font-weight: 600; font-family: Open Sans; padding-left: 30px; color: black;'
+    };
+    setMultipleAttributes(sliderText, multiAttributes);
 
-    const sketchpad = document.createElement('div');
-    sketchpad.classList.add('sketchpad');
-    sketchpad.setAttribute('style', `width: ${gridSize}px; height: ${gridSize}px; border: 5px solid black; display: flex; flex-wrap: wrap; flex-direction: column;`);
-
-    for (let squares = 0; squares < squareNo; squares++) {
-        let square = document.createElement('div');
-        square.classList.add('square');
-        square.setAttribute('style', `width: ${squareSize}px; height: ${squareSize}px; border: 0.05px dotted black; box-sizing: border-box;`);
-        sketchpad.appendChild(square);
-    }
-
-    body.appendChild(sketchpad);
+    slider.appendChild(sliderInput);
+    slider.appendChild(sliderText);
+    sketchpadSetup(sliderInput.value);
+    body.appendChild(slider);
 }
 
 const toSketch = () => {
@@ -80,6 +99,8 @@ const toSketch = () => {
     }); 
 }
 
-setup();
-toSketch();
+const main = () => {
+    setup();
+    toSketch();
+}
 
