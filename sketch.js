@@ -28,20 +28,25 @@ const sketchpadSetup = (inputSize) => {
     document.body.appendChild(sketchpad);
 }
 
-const sliderSetup = () => {
+const sliderSetup = (inputSize) => {
     // Multi attribute variable for elements
     let multiAttributes = {};
 
     const slider = document.createElement('div');
+    multiAttributes = {
+        style: 'width: 120px; height: 60px; padding: 0; margin-right: 50px; background: #fcfcfc; border-radius: 20px; display: flex; flex-direction: column; justify-content: center; align-items: center; box-shadow: 0px 15px 40px #7E6D5766;'
+    };
+    setMultipleAttributes(slider, multiAttributes);
     slider.classList.add('slider');
 
     const sliderInput = document.createElement('input');
     multiAttributes = {
+        style: '-webkit-appearance:none; width: 100px; height: 2px; background-color: black; border: none; outline: none; margin: 10px 0 0 0;',
         type: 'range',
         min: '1',
         max: '100',
-        value: '8', // default value for this and sliderText innerText
-        oninput: 'document.querySelector(\'.sliderValue\').innerText = this.value'
+        value: inputSize, 
+        oninput: 'document.querySelector(\'.sliderValue\').innerText = this.value + \' x \' + this.value'
     };
     setMultipleAttributes(sliderInput, multiAttributes);
     sliderInput.addEventListener('input', (event) => {
@@ -52,9 +57,9 @@ const sliderSetup = () => {
 
     const sliderText = document.createElement('p');
     sliderText.classList.add('sliderValue');
-    sliderText.innerText = sliderInput.value;
+    sliderText.innerText = sliderInput.value + ' x ' + sliderInput.value;
     multiAttributes = {
-        style: 'font-size: 26px; font-weight: 600; font-family: Open Sans; padding-left: 30px; color: black;'
+        style: 'font-size: 26px; font-weight: 600; font-family: Open Sans; margin: 5px 0 0 0; color: black;'
     };
     setMultipleAttributes(sliderText, multiAttributes);
 
@@ -79,7 +84,7 @@ const pageSetup = () => {
     // Default grid size value for sketchpad setup 
     const defaultGridSize = 8;
 
-    sliderSetup();
+    sliderSetup(defaultGridSize);
     sketchpadSetup(defaultGridSize);
 }
 
