@@ -11,7 +11,6 @@ const sketchpadSetup = (inputSize) => {
     const squareNo = inputSize**2;
 
     let sketchpad = document.querySelector('.sketchpad');
-    console.log(sketchpad);
     if (sketchpad) {
         sketchpad.remove();
     }
@@ -29,18 +28,9 @@ const sketchpadSetup = (inputSize) => {
     document.body.appendChild(sketchpad);
 }
 
-const setup = () => {
+const sliderSetup = () => {
     // Multi attribute variable for elements
-    let multiAttributes = {}; 
-
-    const html = document.querySelector('html');
-    html.style.height = '100%';
-
-    const body = document.querySelector('body');
-    multiAttributes = {
-        style: 'min-height: 100%; margin: 0; padding: 0; display: flex; justify-content: center; align-items: center;'
-    };
-    setMultipleAttributes(body, multiAttributes);
+    let multiAttributes = {};
 
     const slider = document.createElement('div');
     slider.classList.add('slider');
@@ -70,8 +60,27 @@ const setup = () => {
 
     slider.appendChild(sliderInput);
     slider.appendChild(sliderText);
-    sketchpadSetup(sliderInput.value);
-    body.appendChild(slider);
+    document.body.appendChild(slider);
+}
+
+const pageSetup = () => {
+    // Multi attribute variable for elements
+    let multiAttributes = {}; 
+
+    const html = document.querySelector('html');
+    html.style.height = '100%';
+
+    const body = document.querySelector('body');
+    multiAttributes = {
+        style: 'min-height: 100%; margin: 0; padding: 0; display: flex; justify-content: center; align-items: center;'
+    };
+    setMultipleAttributes(body, multiAttributes);
+
+    // Default grid size value for sketchpad setup 
+    const defaultGridSize = 8;
+
+    sliderSetup();
+    sketchpadSetup(defaultGridSize);
 }
 
 const toSketch = () => {
@@ -100,7 +109,8 @@ const toSketch = () => {
 }
 
 const main = () => {
-    setup();
+    pageSetup();
     toSketch();
 }
 
+main();
