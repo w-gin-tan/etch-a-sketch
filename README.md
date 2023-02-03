@@ -5,7 +5,7 @@ Milestones:
 [x] Setup the sketchpad grid
     [x] User input slider
         [ ] Positon input slider on external menu in DOM tree
-        [!] Style input slider
+        [X] Draft style of input slider
     [x] Grid sizing (based on slider)
     [x] Sketching feature
         [!] Create a draft color wheel for user to change sketch color
