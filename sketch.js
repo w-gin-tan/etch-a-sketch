@@ -22,5 +22,21 @@ const setup = () => {
     body.appendChild(sketchpad);
 }
 
+const toSketch = () => {
+    const sketchpad = document.querySelector('.sketchpad');
+
+    sketchpad.addEventListener('mouseover', function onMouseOver(event) {
+        // check if target exists and is a square class
+        if (event.target && event.target.classList.contains('square')) {
+            // change color of div
+            let square = event.target;
+            if (square.style.backgroundColor != 'black') {
+                square.style.backgroundColor = 'black';
+            }
+        }
+    }); // remove event listener ie once property
+}
+
 setup();
+toSketch();
 
