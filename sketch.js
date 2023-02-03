@@ -1,17 +1,45 @@
+const setMultipleAttributes = (elem, attributes) => {
+    Object.keys(attributes).forEach(attribute => {
+        elem.setAttribute(attribute, attributes[attribute]);
+    });
+}
+
 const setup = () => {
     // User prompt for grid size
-    const userSize = prompt('How large would you like your grid?');
+    const userSize = prompt('How large would you like your grid?') || 1;
 
     // Grid and square variables
     const gridSize = 256;
     const squareSize = gridSize / userSize;
     const squareNo = userSize**2;
 
+    // Multi attribute variable for elements
+    let multiAttributes = {}; 
+
     const html = document.querySelector('html');
     html.style.height = '100%';
 
     const body = document.querySelector('body');
-    body.setAttribute('style', 'min-height: 100%; margin: 0; padding: 0; display: flex; justify-content: center; align-items: center;');
+    multiAttributes = {
+        style: 'min-height: 100%; margin: 0; padding: 0; display: flex; justify-content: center; align-items: center;'
+    };
+    setMultipleAttributes(body, multiAttributes);
+
+    const slider = document.createElement('div');
+    slider.classList.add('slider');
+
+    const sliderInput = document.createElement('input');
+    multiAttributes = {
+        type: 'range',
+        min: '1',
+        max: '100',
+        value: '8',
+        oninput: 'sliderText.innerText = this.value'
+    };
+
+    const sliderText = document.createElement('p');
+    sliderText.classList.add('sliderValue');
+    
 
     const sketchpad = document.createElement('div');
     sketchpad.classList.add('sketchpad');
