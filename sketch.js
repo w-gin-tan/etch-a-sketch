@@ -26,8 +26,8 @@ const toSketch = () => {
     const sketchpad = document.querySelector('.sketchpad');
 
     sketchpad.addEventListener('mouseover', function onMouseOver(event) {
-        // check if target exists and is a square class
-        if (event.target && event.target.classList.contains('square')) {
+        // check if target exists, is a square class and the LMB is being clicked
+        if (event.target && event.target.classList.contains('square') && event.buttons == 1) {
             // change color of div
             let square = event.target;
             if (square.style.backgroundColor != 'black') {
