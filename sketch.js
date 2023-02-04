@@ -4,9 +4,23 @@ const setMultipleAttributes = (elem, attributes) => {
     });
 }
 
+const menuSetup = () => {
+    // Multi attribute variable for elements
+    let multiAttributes = {}; 
+
+    const menubar = document.createElement('div');
+    multiAttributes = {
+        style: 'height: 100vh; width: 250px; box-shadow: 0px 15px 40px #7E6D5766;'
+    };
+    setMultipleAttributes(menubar, multiAttributes);
+    menubar.classList.add('menubar');
+
+    document.body.appendChild(menubar);
+}
+
 const sketchpadSetup = (inputSize) => {
     // Grid and square variables
-    const gridSize = 256;
+    const gridSize = 512;
     const squareSize = gridSize / inputSize;
     const squareNo = inputSize**2;
 
@@ -65,7 +79,7 @@ const sliderSetup = (inputSize) => {
 
     slider.appendChild(sliderInput);
     slider.appendChild(sliderText);
-    document.body.appendChild(slider);
+    document.body.querySelector('.menubar').appendChild(slider);
 }
 
 const pageSetup = () => {
@@ -77,13 +91,14 @@ const pageSetup = () => {
 
     const body = document.querySelector('body');
     multiAttributes = {
-        style: 'min-height: 100%; margin: 0; padding: 0; display: flex; justify-content: center; align-items: center;'
+        style: 'min-height: 100%; margin: 0; padding: 0; display: flex; align-items: center;'
     };
     setMultipleAttributes(body, multiAttributes);
 
     // Default grid size value for sketchpad setup 
     const defaultGridSize = 8;
 
+    menuSetup();
     sliderSetup(defaultGridSize);
     sketchpadSetup(defaultGridSize);
 }
