@@ -11,4 +11,5 @@ Milestones:
         [!] Create a draft color wheel for user to change sketch color
         [ ] Implement UI for the color wheel
 [ ] External menu features
+    [!] Create menu div to house components
 [ ] Comments on code blocks
