@@ -10,7 +10,7 @@ const menuSetup = () => {
 
     const menubar = document.createElement('div');
     multiAttributes = {
-        style: 'height: 100vh; width: 250px; box-shadow: 0px 15px 40px #7E6D5766;'
+        style: 'height: 100vh; width: 20%; box-shadow: 0px 15px 40px #7E6D5766;'
     };
     setMultipleAttributes(menubar, multiAttributes);
     menubar.classList.add('menubar');
@@ -19,27 +19,47 @@ const menuSetup = () => {
 }
 
 const sketchpadSetup = (inputSize) => {
+    // Multi attribute variable for elements
+    let multiAttributes = {}; 
+
     // Grid and square variables
     const gridSize = 512;
     const squareSize = gridSize / inputSize;
     const squareNo = inputSize**2;
+
+    let sketchview = document.querySelector('.sketchview');
+    if (!sketchview) {
+        sketchview = document.createElement('div');
+        multiAttributes = {
+            style: 'height: 100vh; width: 80%; display: flex; justify-content: center; align-items: center;'
+        };
+        setMultipleAttributes(sketchview, multiAttributes);
+        sketchview.classList.add('sketchview');
+        document.body.appendChild(sketchview);
+    }
 
     let sketchpad = document.querySelector('.sketchpad');
     if (sketchpad) {
         sketchpad.remove();
     }
     sketchpad = document.createElement('div');
+    multiAttributes = {
+        style: `width: ${gridSize}px; height: ${gridSize}px; border: 5px solid black; display: flex; flex-wrap: wrap; flex-direction: column;`
+    };
+    setMultipleAttributes(sketchpad, multiAttributes);
     sketchpad.classList.add('sketchpad');
-    sketchpad.setAttribute('style', `width: ${gridSize}px; height: ${gridSize}px; border: 5px solid black; display: flex; flex-wrap: wrap; flex-direction: column;`);
 
     for (let squares = 0; squares < squareNo; squares++) {
         let square = document.createElement('div');
+        multiAttributes = {
+            style: `width: ${squareSize}px; height: ${squareSize}px; border: 0.05px dotted black; box-sizing: border-box;`
+        };
+        setMultipleAttributes(square, multiAttributes);
         square.classList.add('square');
-        square.setAttribute('style', `width: ${squareSize}px; height: ${squareSize}px; border: 0.05px dotted black; box-sizing: border-box;`);
         sketchpad.appendChild(square);
     }
 
-    document.body.appendChild(sketchpad);
+    sketchview.appendChild(sketchpad);
 }
 
 const sliderSetup = (inputSize) => {
@@ -91,7 +111,7 @@ const pageSetup = () => {
 
     const body = document.querySelector('body');
     multiAttributes = {
-        style: 'min-height: 100%; margin: 0; padding: 0; display: flex; align-items: center;'
+        style: 'min-height: 100%; margin: 0; padding: 0; display: flex;'
     };
     setMultipleAttributes(body, multiAttributes);
 
