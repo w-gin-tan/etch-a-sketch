@@ -10,7 +10,7 @@ const menuSetup = () => {
 
     const menubar = document.createElement('div');
     multiAttributes = {
-        style: 'height: 100vh; width: 20%; display: flex; justify-content: center; box-shadow: 0px 15px 40px #7E6D5766;'
+        style: 'height: 100vh; width: 20%; display: flex; flex-direction: column; align-items: center; box-shadow: 0px 15px 40px #7E6D5766;'
     };
     setMultipleAttributes(menubar, multiAttributes);
     menubar.classList.add('menubar');
@@ -68,7 +68,7 @@ const sliderSetup = (inputSize) => {
 
     const slider = document.createElement('div');
     multiAttributes = {
-        style: 'width: 100%; height: 60px; padding: 0; margin: 2vh; background: #fcfcfc; border-radius: 20px; display: flex; flex-direction: column; justify-content: center; align-items: center; box-shadow: 0px 15px 40px #7E6D5766;'
+        style: 'width: 80%; height: 60px; padding: 0; margin: 2vh; background: #fcfcfc; border-radius: 20px; display: flex; flex-direction: column; justify-content: center; align-items: center; box-shadow: 0px 15px 40px #7E6D5766;'
     };
     setMultipleAttributes(slider, multiAttributes);
     slider.classList.add('slider');
@@ -102,6 +102,22 @@ const sliderSetup = (inputSize) => {
     document.body.querySelector('.menubar').appendChild(slider);
 }
 
+const paletteSetup = () => {
+    // Multi attribute variable for elements
+    let multiAttributes = {};
+
+    const palette = document.createElement('input');
+    multiAttributes = {
+        style: '-webkit-appearance: none; width: 80%; height: 60px; padding: 0; margin: 2vh; background: #fcfcfc; border: none; display: flex; flex-direction: column; justify-content: center; align-items: center;',
+        type: 'color',
+        value: 'black'
+    };
+    setMultipleAttributes(palette, multiAttributes);
+    palette.classList.add('palette');
+
+    document.body.querySelector('.menubar').appendChild(palette);
+}
+
 const pageSetup = () => {
     // Multi attribute variable for elements
     let multiAttributes = {}; 
@@ -120,6 +136,7 @@ const pageSetup = () => {
 
     menuSetup();
     sliderSetup(defaultGridSize);
+    paletteSetup();
     sketchpadSetup(defaultGridSize);
 }
 
