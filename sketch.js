@@ -10,7 +10,7 @@ const menuSetup = () => {
 
     const menubar = document.createElement('div');
     multiAttributes = {
-        style: 'height: 100vh; width: 20%; box-shadow: 0px 15px 40px #7E6D5766;'
+        style: 'height: 100vh; width: 20%; display: flex; justify-content: center; box-shadow: 0px 15px 40px #7E6D5766;'
     };
     setMultipleAttributes(menubar, multiAttributes);
     menubar.classList.add('menubar');
@@ -68,7 +68,7 @@ const sliderSetup = (inputSize) => {
 
     const slider = document.createElement('div');
     multiAttributes = {
-        style: 'width: 120px; height: 60px; padding: 0; margin-right: 50px; background: #fcfcfc; border-radius: 20px; display: flex; flex-direction: column; justify-content: center; align-items: center; box-shadow: 0px 15px 40px #7E6D5766;'
+        style: 'width: 100%; height: 60px; padding: 0; margin: 2vh; background: #fcfcfc; border-radius: 20px; display: flex; flex-direction: column; justify-content: center; align-items: center; box-shadow: 0px 15px 40px #7E6D5766;'
     };
     setMultipleAttributes(slider, multiAttributes);
     slider.classList.add('slider');
@@ -130,9 +130,12 @@ const toSketch = () => {
         if (event.target && event.target.classList.contains('square')) {
             // change color of div
             let square = event.target;
-            if (square.style.backgroundColor != 'black') {
+            /*
+            if (!square.style.backgroundColor) {
                 square.style.backgroundColor = 'black';
             }
+            */
+            square.style.backgroundColor = '#' + Math.floor(Math.random() * 16777215).toString(16);
         }
     });
 
@@ -141,9 +144,12 @@ const toSketch = () => {
         if (event.target && event.target.classList.contains('square') && event.buttons == 1) {
             // change color of div
             let square = event.target;
-            if (square.style.backgroundColor != 'black') {
+            /*
+            if (!square.style.backgroundColor) {
                 square.style.backgroundColor = 'black';
             }
+            */
+            square.style.backgroundColor = '#' + Math.floor(Math.random() * 16777215).toString(16);
         }
     }); 
 }
