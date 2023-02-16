@@ -118,28 +118,6 @@ const paletteSetup = () => {
     document.body.querySelector('.menubar').appendChild(palette);
 }
 
-const pageSetup = () => {
-    // Multi attribute variable for elements
-    let multiAttributes = {}; 
-
-    const html = document.querySelector('html');
-    html.style.height = '100%';
-
-    const body = document.querySelector('body');
-    multiAttributes = {
-        style: 'min-height: 100%; margin: 0; padding: 0; display: flex;'
-    };
-    setMultipleAttributes(body, multiAttributes);
-
-    // Default grid size value for sketchpad setup 
-    const defaultGridSize = 8;
-
-    menuSetup();
-    sliderSetup(defaultGridSize);
-    paletteSetup();
-    sketchpadSetup(defaultGridSize);
-}
-
 const fillIn = (square) => {
     // change square background color based on palette color
     const menubar = document.body.querySelector('.menubar');
@@ -165,9 +143,27 @@ const toSketch = () => {
     }); 
 }
 
-const main = () => {
-    pageSetup();
+const pageSetup = () => {
+    // Multi attribute variable for elements
+    let multiAttributes = {}; 
+
+    const html = document.querySelector('html');
+    html.style.height = '100%';
+
+    const body = document.querySelector('body');
+    multiAttributes = {
+        style: 'min-height: 100%; margin: 0; padding: 0; display: flex;'
+    };
+    setMultipleAttributes(body, multiAttributes);
+
+    // Default grid size value for sketchpad setup 
+    const defaultGridSize = 8;
+
+    menuSetup();
+    sliderSetup(defaultGridSize);
+    paletteSetup();
+    sketchpadSetup(defaultGridSize);
     toSketch();
 }
 
-main();
+pageSetup();
