@@ -140,33 +140,27 @@ const pageSetup = () => {
     sketchpadSetup(defaultGridSize);
 }
 
+const fillIn = (square) => {
+    // change square background color based on palette color
+    const menubar = document.body.querySelector('.menubar');
+    const palette = menubar.querySelector('.palette');
+    square.style.backgroundColor = palette.value;
+}
+
 const toSketch = () => {
     const sketchpad = document.querySelector('.sketchpad');
 
     sketchpad.addEventListener('mousedown', function onMouseDown(event) {
+        // check if target exists, is a square class and the LMB is being clicked
         if (event.target && event.target.classList.contains('square')) {
-            // change color of div
-            let square = event.target;
-            /*
-            if (!square.style.backgroundColor) {
-                square.style.backgroundColor = 'black';
-            }
-            */
-            square.style.backgroundColor = '#' + Math.floor(Math.random() * 16777215).toString(16);
+            fillIn(event.target);
         }
     });
 
     sketchpad.addEventListener('mouseover', function onMouseOver(event) {
         // check if target exists, is a square class and the LMB is being clicked
         if (event.target && event.target.classList.contains('square') && event.buttons == 1) {
-            // change color of div
-            let square = event.target;
-            /*
-            if (!square.style.backgroundColor) {
-                square.style.backgroundColor = 'black';
-            }
-            */
-            square.style.backgroundColor = '#' + Math.floor(Math.random() * 16777215).toString(16);
+            fillIn(event.target);
         }
     }); 
 }
