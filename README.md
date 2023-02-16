@@ -1,17 +1,4 @@
 # etch-a-sketch
-DOM Manipulation project based on the Foundations Course in The Odin Project.
+Web-browser based etch-a-sketch. Contains grid sizing, color palette and eraser tools.
 
-Milestones:
-[x] Setup the sketchpad grid
-    [x] User input slider
-        [X] Positon input slider on external menu in DOM tree
-        [X] Draft style of input slider
-    [x] Grid sizing (based on slider)
-    [x] Sketching feature
-        [x] Create a draft color wheel for user to change sketch color
-        [x] Input element for the color wheel
-[ ] External menu features
-    [x] Create menu div to house components
-    [x] Eraser tool
-    [ ] Toggle grid
-[ ] Comments on code blocks
+[Etch-a-sketch](https://w-gin-tan.github.io/etch-a-sketch/)
