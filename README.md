@@ -12,5 +12,6 @@ Milestones:
         [x] Input element for the color wheel
 [ ] External menu features
     [x] Create menu div to house components
-    [ ] Eraser tool
+    [x] Eraser tool
+    [ ] Toggle grid
 [ ] Comments on code blocks
