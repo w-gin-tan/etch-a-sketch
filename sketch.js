@@ -52,7 +52,7 @@ const sketchpadSetup = (inputSize) => {
     for (let squares = 0; squares < squareNo; squares++) {
         let square = document.createElement('div');
         multiAttributes = {
-            style: `width: ${squareSize}px; height: ${squareSize}px; border: 0.05px dotted black; box-sizing: border-box;`
+            style: `width: ${squareSize}px; height: ${squareSize}px; border: none; box-sizing: border-box;`
         };
         setMultipleAttributes(square, multiAttributes);
         square.classList.add('square');
@@ -118,16 +118,62 @@ const paletteSetup = () => {
     document.body.querySelector('.menubar').appendChild(palette);
 }
 
-const eraserSetup = () => {
-    // Button declaration
-    // Styling
-        // Focused when clicked
-        // Otherwise default
-    // OnClick
+const toolColorHover = (elm, bgColor, textColor) => {
+    // Switch background and text colors everytime a hover, click, leave event occurs
+    elm.style.color = textColor;
+    elm.style.backgroundColor = bgColor;
 }
 
-const fillIn = (square, colour) => {
-    square.style.backgroundColor = colour;
+const eraserSetup = () => {
+    // Multi attribute variable for elements
+    let multiAttributes = {};
+
+    // Styling the eraser button
+    const eraser = document.createElement('button');
+    multiAttributes = {
+        style: 'width: 80%; height: 60px; padding: 0; margin: 2vh; background: #fcfcfc; border: none; border-radius: 20px; display: flex; flex-direction: column; justify-content: center; align-items: center; box-shadow: 0px 15px 40px #7E6D5766; font-size: 26px; font-weight: 600; font-family: Open Sans; color: #030303;',
+    };
+    eraser.textContent = 'Eraser';
+    setMultipleAttributes(eraser, multiAttributes);
+    eraser.classList.add('eraser', 'off');
+
+    // Button mouseover styling
+    eraser.addEventListener('mouseover', (e) => {
+        toolColorHover(e.target, '#030303', '#fcfcfc');
+    });
+
+    // Button mouseleave styling
+    eraser.addEventListener('mouseleave', (e) => {
+        if (e.target.classList.contains('off')) {
+            toolColorHover(e.target, '#fcfcfc', '#030303');
+        }
+    });
+
+    // Button onClick styling
+    eraser.addEventListener('click', (e) => {
+        if (e.target.classList.contains('off')) {
+            e.target.classList.remove('off');
+            toolColorHover(e.target, '#030303', '#fcfcfc');
+        } else {
+            e.target.classList.add('off');
+            toolColorHover(e.target, '#fcfcfc', '#030303');;
+        }
+    });
+
+    document.body.querySelector('.menubar').appendChild(eraser);
+}
+
+const fillIn = (square) => {
+    const menubar = document.body.querySelector('.menubar');
+    const palette = menubar.querySelector('.palette');
+    const eraser = menubar.querySelector('.eraser');
+
+    // if eraser is on, all squares coloured white
+    if (!eraser.classList.contains('off')) {
+        square.style.backgroundColor = 'white';
+    } else {
+        square.style.backgroundColor = palette.value;
+    }
 }
 
 const toSketch = () => {
@@ -136,20 +182,14 @@ const toSketch = () => {
     sketchpad.addEventListener('mousedown', function onMouseDown(event) {
         // check if target exists, is a square class and the LMB is being clicked
         if (event.target && event.target.classList.contains('square')) {
-            // change square background color based on palette color
-            const menubar = document.body.querySelector('.menubar');
-            const palette = menubar.querySelector('.palette');
-            fillIn(event.target, palette.value);
+            fillIn(event.target);
         }
     });
 
     sketchpad.addEventListener('mouseover', function onMouseOver(event) {
         // check if target exists, is a square class and the LMB is being clicked
         if (event.target && event.target.classList.contains('square') && event.buttons == 1) {
-            // change square background color based on palette color
-            const menubar = document.body.querySelector('.menubar');
-            const palette = menubar.querySelector('.palette');
-            fillIn(event.target, palette.value);
+            fillIn(event.target);
         }
     }); 
 }
@@ -173,6 +213,7 @@ const pageSetup = () => {
     menuSetup();
     sliderSetup(defaultGridSize);
     paletteSetup();
+    eraserSetup();
     sketchpadSetup(defaultGridSize);
     toSketch();
 }
