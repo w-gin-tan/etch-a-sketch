@@ -118,11 +118,16 @@ const paletteSetup = () => {
     document.body.querySelector('.menubar').appendChild(palette);
 }
 
-const fillIn = (square) => {
-    // change square background color based on palette color
-    const menubar = document.body.querySelector('.menubar');
-    const palette = menubar.querySelector('.palette');
-    square.style.backgroundColor = palette.value;
+const eraserSetup = () => {
+    // Button declaration
+    // Styling
+        // Focused when clicked
+        // Otherwise default
+    // OnClick
+}
+
+const fillIn = (square, colour) => {
+    square.style.backgroundColor = colour;
 }
 
 const toSketch = () => {
@@ -131,14 +136,20 @@ const toSketch = () => {
     sketchpad.addEventListener('mousedown', function onMouseDown(event) {
         // check if target exists, is a square class and the LMB is being clicked
         if (event.target && event.target.classList.contains('square')) {
-            fillIn(event.target);
+            // change square background color based on palette color
+            const menubar = document.body.querySelector('.menubar');
+            const palette = menubar.querySelector('.palette');
+            fillIn(event.target, palette.value);
         }
     });
 
     sketchpad.addEventListener('mouseover', function onMouseOver(event) {
         // check if target exists, is a square class and the LMB is being clicked
         if (event.target && event.target.classList.contains('square') && event.buttons == 1) {
-            fillIn(event.target);
+            // change square background color based on palette color
+            const menubar = document.body.querySelector('.menubar');
+            const palette = menubar.querySelector('.palette');
+            fillIn(event.target, palette.value);
         }
     }); 
 }
